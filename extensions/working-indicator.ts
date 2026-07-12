@@ -49,7 +49,6 @@ const VERBS = [
   "damn i am cracked",
   "trust me broski",
   "six seven",
-  "Son",
   "hm walks in",
   "7x7=49",
   "hacking the CIA",

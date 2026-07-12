@@ -52,5 +52,39 @@ install "git:github.com/vvv850/pi-pretty-codeblocks"
 install "git:github.com/edxeth/pi-subagents"
 install "git:github.com/edxeth/pi-claude-auth"
 
+# --- subagent definitions (used by pi-subagents) ---
+# Agent .md files are not a pi package resource type, so we copy them into
+# ~/.pi/agent/agents/ ourselves. Existing files are never overwritten.
+AGENT_DIR="${PI_AGENT_DIR:-$HOME/.pi/agent}/agents"
+
+# Find the agents/ source: local clone first, else the clone pi just made.
+src=""
+if [ -n "${0%%/*}" ] || [ -d "$(dirname -- "$0")/agents" ]; then
+  d=$(CDPATH= cd -- "$(dirname -- "$0")" 2>/dev/null && pwd) || d=""
+  [ -n "$d" ] && [ -d "$d/agents" ] && src="$d/agents"
+fi
+if [ -z "$src" ]; then
+  repo_path=${SETUP_REPO#git:}
+  repo_path=${repo_path%@*}
+  candidate="${PI_AGENT_DIR:-$HOME/.pi/agent}/git/$repo_path/agents"
+  [ -d "$candidate" ] && src="$candidate"
+fi
+
+if [ -n "$src" ]; then
+  mkdir -p "$AGENT_DIR"
+  for f in "$src"/*.md; do
+    [ -e "$f" ] || continue
+    base=$(basename "$f")
+    if [ -e "$AGENT_DIR/$base" ]; then
+      echo "==> agents: $base already exists, skipping"
+    else
+      cp "$f" "$AGENT_DIR/$base"
+      echo "==> agents: installed $base"
+    fi
+  done
+else
+  echo "warning: could not locate agents/ directory; subagent definitions not installed" >&2
+fi
+
 echo
 echo "Done. Start pi to use the new setup. Manage pieces with 'pi list' / 'pi config'."
