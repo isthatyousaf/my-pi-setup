@@ -4,6 +4,19 @@ My personal [pi](https://github.com/earendil-works/pi) setup, bundled as a pi pa
 
 ## Install
 
+One command installs everything — this package plus all third-party pi packages the setup uses:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/<you>/my-pi-setup/main/install.sh | sh
+# or from a clone:
+./install.sh
+```
+
+Each package is registered individually, so you can update, disable, or remove any
+piece afterwards with `pi update --all`, `pi config`, and `pi remove`.
+
+To install only this package's own extensions/skills/prompts, without the third-party set:
+
 ```bash
 pi install git:github.com/<you>/my-pi-setup
 # or try it once without installing:
@@ -20,11 +33,9 @@ pi -e git:github.com/<you>/my-pi-setup
 - `working-indicator.ts` — morphing braille orb + shimmering verb working indicator
 - `orca-*.ts` — Orca-managed helpers; they no-op unless Orca environment variables are set
 
-`full-context-bar` and `pi-tps` render through [pi-fancy-footer](https://www.npmjs.com/package/pi-fancy-footer); install it too for those widgets to appear:
+`full-context-bar` and `pi-tps` render through [pi-fancy-footer](https://www.npmjs.com/package/pi-fancy-footer), which `install.sh` installs for you.
 
-```bash
-pi install npm:pi-fancy-footer
-```
+**Third-party packages** (installed by `install.sh`) — pi-listen, pi-auto-trees, pi-codex-conversion, pi-fancy-footer, pi-ralph-loop, pi-better-skills, pi-langfuse, pi-grok-build, visual-explainer, pi-pretty-codeblocks, pi-subagents
 
 **Skills** (`skills/`) — agent-browser, codebase-design, diagnosing-bugs, domain-modeling, grill-with-docs, handoff, improve, improve-codebase-architecture, resolving-merge-conflicts, tdd, teach, to-prd, writing-great-skills, writing-shape
 
@@ -32,8 +43,4 @@ pi install npm:pi-fancy-footer
 
 ## Not included
 
-Settings (`settings.json`), model/provider config, MCP servers, auth, and the subagent runtime are not part of this package. For subagents, install [pi-subagents](https://github.com/edxeth/pi-subagents) separately:
-
-```bash
-pi install git:github.com/edxeth/pi-subagents
-```
+Settings (`settings.json`), model/provider config, MCP servers, auth, and private local packages (e.g. `pi-claude-auth`) are not part of this package.
