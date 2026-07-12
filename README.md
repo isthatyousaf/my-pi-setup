@@ -31,7 +31,6 @@ pi -e git:github.com/isthatyousaf/my-pi-setup
 - `pi-tps.ts` — average output tokens/second footer widget
 - `recap.ts` — "where were we" one-liner pinned above the editor after idle time
 - `working-indicator.ts` — morphing braille orb + shimmering verb working indicator
-- `orca-*.ts` — Orca-managed helpers; they no-op unless Orca environment variables are set
 
 `full-context-bar` and `pi-tps` render through [pi-fancy-footer](https://www.npmjs.com/package/pi-fancy-footer), which `install.sh` installs for you.
 
