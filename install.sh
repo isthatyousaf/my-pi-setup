@@ -50,6 +50,7 @@ install "git:github.com/IgorWarzocha/pi-grok-build"
 install "git:github.com/nicobailon/visual-explainer"
 install "git:github.com/vvv850/pi-pretty-codeblocks"
 install "git:github.com/edxeth/pi-subagents"
+install "git:github.com/edxeth/pi-claude-auth"
 
 echo
 echo "Done. Start pi to use the new setup. Manage pieces with 'pi list' / 'pi config'."

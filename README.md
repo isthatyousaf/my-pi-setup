@@ -35,7 +35,7 @@ pi -e git:github.com/<you>/my-pi-setup
 
 `full-context-bar` and `pi-tps` render through [pi-fancy-footer](https://www.npmjs.com/package/pi-fancy-footer), which `install.sh` installs for you.
 
-**Third-party packages** (installed by `install.sh`) — pi-listen, pi-auto-trees, pi-codex-conversion, pi-fancy-footer, pi-ralph-loop, pi-better-skills, pi-langfuse, pi-grok-build, visual-explainer, pi-pretty-codeblocks, pi-subagents
+**Third-party packages** (installed by `install.sh`) — pi-listen, pi-auto-trees, pi-codex-conversion, pi-fancy-footer, pi-ralph-loop, pi-better-skills, pi-langfuse, pi-grok-build, visual-explainer, pi-pretty-codeblocks, pi-subagents, pi-claude-auth
 
 **Skills** (`skills/`) — agent-browser, codebase-design, diagnosing-bugs, domain-modeling, grill-with-docs, handoff, improve, improve-codebase-architecture, resolving-merge-conflicts, tdd, teach, to-prd, writing-great-skills, writing-shape
 
@@ -43,4 +43,4 @@ pi -e git:github.com/<you>/my-pi-setup
 
 ## Not included
 
-Settings (`settings.json`), model/provider config, MCP servers, auth, and private local packages (e.g. `pi-claude-auth`) are not part of this package.
+Settings (`settings.json`), model/provider config, MCP servers, and auth credentials are not part of this package.
