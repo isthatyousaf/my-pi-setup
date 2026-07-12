@@ -1,0 +1,124 @@
+{
+  "refreshMs": 2000,
+  "iconFamily": "nerd",
+  "gaugeStyle": "bars",
+  "gaugeWidth": 6,
+  "defaultTextColor": "text",
+  "defaultIconColor": "muted",
+  "widgets": {
+    "model": {
+      "row": 0,
+      "align": "left",
+      "position": 0,
+      "textColor": "accent",
+      "icon": "hide"
+    },
+    "thinking": {
+      "row": 0,
+      "align": "left",
+      "position": 1,
+      "textColor": "muted",
+      "icon": "hide"
+    },
+    "context-capacity": {
+      "enabled": false
+    },
+    "context-bar": {
+      "enabled": false
+    },
+    "total-cost": {
+      "row": 0,
+      "position": 0,
+      "enabled": true,
+      "iconColor": "text",
+      "textColor": "accent",
+      "align": "right"
+    },
+    "location": {
+      "align": "left",
+      "iconColor": "accent",
+      "fill": "none",
+      "minWidth": 24,
+      "textColor": "accent",
+      "enabled": true
+    },
+    "branch": {
+      "align": "left",
+      "position": 2,
+      "iconColor": "success",
+      "textColor": "success",
+      "enabled": true,
+      "row": 2
+    },
+    "commit": {
+      "position": 7,
+      "enabled": true,
+      "textColor": "accent",
+      "iconColor": "success",
+      "align": "right",
+      "row": 3
+    },
+    "pull-request": {
+      "row": 1,
+      "align": "right",
+      "position": 0,
+      "textColor": "text",
+      "enabled": true
+    },
+    "pull-request-review-threads": {
+      "row": 1,
+      "align": "right",
+      "position": 1,
+      "textColor": "warning"
+    },
+    "pull-request-ci-status": {
+      "row": 1,
+      "align": "right",
+      "position": 2,
+      "textColor": "error"
+    },
+    "provider-status": {
+      "enabled": false,
+      "position": 7,
+      "row": 1
+    },
+    "diff-added": {
+      "row": 2,
+      "align": "right",
+      "position": 2,
+      "textColor": "success",
+      "enabled": true
+    },
+    "diff-removed": {
+      "row": 2,
+      "align": "right",
+      "position": 4,
+      "textColor": "error",
+      "enabled": true
+    },
+    "git-status": {
+      "row": 1,
+      "align": "left",
+      "position": 5,
+      "textColor": "warning",
+      "enabled": true
+    }
+  },
+  "extensionWidgets": {
+    "pi-shared.full-context-bar": {
+      "row": 0,
+      "align": "middle",
+      "position": 0,
+      "fill": "grow",
+      "minWidth": 20,
+      "icon": "hide",
+      "iconColor": "error"
+    },
+    "pi-tps.token-rate": {
+      "row": 0,
+      "align": "right",
+      "position": 1,
+      "textColor": "warning"
+    }
+  }
+}

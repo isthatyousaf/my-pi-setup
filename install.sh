@@ -88,8 +88,20 @@ if [ -n "$root" ]; then
     cp "$root/APPEND_SYSTEM.md" "$PI_DIR/APPEND_SYSTEM.md"
     echo "==> installed APPEND_SYSTEM.md"
   fi
+
+  # Extension config files (footer layout, codex tweaks). Never overwritten.
+  for f in "$root"/config/*.json; do
+    [ -e "$f" ] || continue
+    base=$(basename "$f")
+    if [ -e "$PI_DIR/$base" ]; then
+      echo "==> config: $base already exists, skipping"
+    else
+      cp "$f" "$PI_DIR/$base"
+      echo "==> config: installed $base"
+    fi
+  done
 else
-  echo "warning: could not locate repo files; agents/ and APPEND_SYSTEM.md not installed" >&2
+  echo "warning: could not locate repo files; agents/, APPEND_SYSTEM.md, and config not installed" >&2
 fi
 
 echo

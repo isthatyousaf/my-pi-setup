@@ -37,13 +37,15 @@ pi -e git:github.com/<you>/my-pi-setup
 
 **Third-party packages** (installed by `install.sh`) — pi-listen, pi-auto-trees, pi-codex-conversion, pi-fancy-footer, pi-ralph-loop, pi-better-skills, pi-langfuse, pi-grok-build, visual-explainer, pi-pretty-codeblocks, pi-subagents, pi-claude-auth
 
-**Skills** (`skills/`) — agent-browser, codebase-design, diagnosing-bugs, domain-modeling, grill-with-docs, handoff, improve, improve-codebase-architecture, resolving-merge-conflicts, tdd, teach, to-prd, writing-great-skills, writing-shape
+**Skills** (`skills/`) — agent-browser, api-design-principles, codebase-design, diagnosing-bugs, domain-modeling, exa, excalidraw-diagram, firecrawl, frontend-design, grill-with-docs, handoff, improve, improve-codebase-architecture, oracle, react-doctor, research, resolving-merge-conflicts, solana-dev, tdd, teach, thermo-nuclear reviews, tinyfish, to-prd, torpathy, writing-great-skills, writing-shape. Some (exa, firecrawl, tinyfish, research, oracle) need your own API keys; the excalidraw skill needs its Python venv rebuilt per its SKILL.md.
 
 **Prompt templates** (`prompts/`) — `ar.md`, `es.md`
 
 **Subagent definitions** (`agents/`) — reviewer, scout, second-opinion, worker. `install.sh` copies these to `~/.pi/agent/agents/` (never overwriting existing files) so they work with [pi-subagents](https://github.com/edxeth/pi-subagents). They reference specific models (e.g. `openai-codex/gpt-5.6-sol`, `anthropic/claude-opus-4-8`); you need your own auth for those providers, or edit the `model:` lines.
 
 **System prompt addendum** (`APPEND_SYSTEM.md`) — behavior rules appended to pi's system prompt. `install.sh` copies it to `~/.pi/agent/APPEND_SYSTEM.md` only if you don't already have one.
+
+**Extension config** (`config/`) — fancy-footer layout, codex-conversion and codex-continue settings. Copied to `~/.pi/agent/` only for files you don't already have.
 
 ## Not included
 
