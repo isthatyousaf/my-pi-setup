@@ -36,7 +36,7 @@ pi -e git:github.com/isthatyousaf/my-pi-setup
 
 **Third-party packages** (installed by `install.sh`) — pi-listen, pi-auto-trees, pi-codex-conversion, pi-fancy-footer, pi-ralph-loop, pi-better-skills, pi-langfuse, pi-grok-build, visual-explainer, pi-pretty-codeblocks, pi-subagents, pi-claude-auth
 
-**Skills** (`skills/`) — agent-browser, api-design-principles, codebase-design, diagnosing-bugs, domain-modeling, exa, excalidraw-diagram, firecrawl, frontend-design, grill-with-docs, handoff, improve, improve-codebase-architecture, oracle, react-doctor, research, resolving-merge-conflicts, solana-dev, tdd, teach, thermo-nuclear reviews, tinyfish, to-prd, torpathy, writing-great-skills, writing-shape. Some (exa, firecrawl, tinyfish, research, oracle) need your own API keys; the excalidraw skill needs its Python venv rebuilt per its SKILL.md.
+**Skills** (`skills/`) — api-design-principles, codebase-design, diagnosing-bugs, domain-modeling, frontend-design, grill-with-docs, handoff, improve, improve-codebase-architecture, resolving-merge-conflicts, solana-dev, tdd, teach, thermo-nuclear reviews, to-prd, torpathy, writing-great-skills, writing-shape
 
 **Prompt templates** (`prompts/`) — `ar.md`, `es.md`
 
@@ -44,7 +44,7 @@ pi -e git:github.com/isthatyousaf/my-pi-setup
 
 **System prompt addendum** (`APPEND_SYSTEM.md`) — behavior rules appended to pi's system prompt. `install.sh` copies it to `~/.pi/agent/APPEND_SYSTEM.md` only if you don't already have one.
 
-**Extension config** (`config/`) — fancy-footer layout, codex-conversion and codex-continue settings. Copied to `~/.pi/agent/` only for files you don't already have.
+**Extension config** (`config/`) — fancy-footer layout and codex-conversion settings. Copied to `~/.pi/agent/` only for files you don't already have.
 
 ## Not included
 

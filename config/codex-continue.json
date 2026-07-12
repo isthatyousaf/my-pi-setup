@@ -1,8 +1,0 @@
-{
-  "enabled": true,
-  "maxContinue": 6,
-  "markerText": "Continue thinking...",
-  "minTier": 1,
-  "maxTier": 0,
-  "truncationStep": 518
-}
