@@ -43,6 +43,8 @@ pi -e git:github.com/<you>/my-pi-setup
 
 **Subagent definitions** (`agents/`) — reviewer, scout, second-opinion, worker. `install.sh` copies these to `~/.pi/agent/agents/` (never overwriting existing files) so they work with [pi-subagents](https://github.com/edxeth/pi-subagents). They reference specific models (e.g. `openai-codex/gpt-5.6-sol`, `anthropic/claude-opus-4-8`); you need your own auth for those providers, or edit the `model:` lines.
 
+**System prompt addendum** (`APPEND_SYSTEM.md`) — behavior rules appended to pi's system prompt. `install.sh` copies it to `~/.pi/agent/APPEND_SYSTEM.md` only if you don't already have one.
+
 ## Not included
 
-Settings (`settings.json`), model/provider config, MCP servers, and auth credentials are not part of this package.
+Settings (`settings.json`), model/provider config, MCP servers, and auth credentials are not part of this package or the installer.

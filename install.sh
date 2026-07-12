@@ -52,38 +52,44 @@ install "git:github.com/vvv850/pi-pretty-codeblocks"
 install "git:github.com/edxeth/pi-subagents"
 install "git:github.com/edxeth/pi-claude-auth"
 
-# --- subagent definitions (used by pi-subagents) ---
-# Agent .md files are not a pi package resource type, so we copy them into
-# ~/.pi/agent/agents/ ourselves. Existing files are never overwritten.
-AGENT_DIR="${PI_AGENT_DIR:-$HOME/.pi/agent}/agents"
+# --- config files pi packages can't carry ---
+# Subagent .md definitions and APPEND_SYSTEM.md are not pi package resource
+# types, so we copy them into ~/.pi/agent/ ourselves. Existing files are
+# never overwritten.
+PI_DIR="${PI_AGENT_DIR:-$HOME/.pi/agent}"
 
-# Find the agents/ source: local clone first, else the clone pi just made.
-src=""
-if [ -n "${0%%/*}" ] || [ -d "$(dirname -- "$0")/agents" ]; then
-  d=$(CDPATH= cd -- "$(dirname -- "$0")" 2>/dev/null && pwd) || d=""
-  [ -n "$d" ] && [ -d "$d/agents" ] && src="$d/agents"
-fi
-if [ -z "$src" ]; then
+# Find the repo root: local clone first, else the clone pi just made.
+root=""
+d=$(CDPATH= cd -- "$(dirname -- "$0")" 2>/dev/null && pwd) || d=""
+if [ -n "$d" ] && [ -d "$d/agents" ]; then
+  root="$d"
+else
   repo_path=${SETUP_REPO#git:}
   repo_path=${repo_path%@*}
-  candidate="${PI_AGENT_DIR:-$HOME/.pi/agent}/git/$repo_path/agents"
-  [ -d "$candidate" ] && src="$candidate"
+  [ -d "$PI_DIR/git/$repo_path/agents" ] && root="$PI_DIR/git/$repo_path"
 fi
 
-if [ -n "$src" ]; then
-  mkdir -p "$AGENT_DIR"
-  for f in "$src"/*.md; do
+if [ -n "$root" ]; then
+  mkdir -p "$PI_DIR/agents"
+  for f in "$root"/agents/*.md; do
     [ -e "$f" ] || continue
     base=$(basename "$f")
-    if [ -e "$AGENT_DIR/$base" ]; then
+    if [ -e "$PI_DIR/agents/$base" ]; then
       echo "==> agents: $base already exists, skipping"
     else
-      cp "$f" "$AGENT_DIR/$base"
+      cp "$f" "$PI_DIR/agents/$base"
       echo "==> agents: installed $base"
     fi
   done
+
+  if [ -e "$PI_DIR/APPEND_SYSTEM.md" ]; then
+    echo "==> APPEND_SYSTEM.md already exists, skipping (compare with $root/APPEND_SYSTEM.md)"
+  elif [ -e "$root/APPEND_SYSTEM.md" ]; then
+    cp "$root/APPEND_SYSTEM.md" "$PI_DIR/APPEND_SYSTEM.md"
+    echo "==> installed APPEND_SYSTEM.md"
+  fi
 else
-  echo "warning: could not locate agents/ directory; subagent definitions not installed" >&2
+  echo "warning: could not locate repo files; agents/ and APPEND_SYSTEM.md not installed" >&2
 fi
 
 echo
