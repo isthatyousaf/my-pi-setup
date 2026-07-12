@@ -7,7 +7,7 @@ My personal [pi](https://github.com/earendil-works/pi) setup, bundled as a pi pa
 One command installs everything — this package plus all third-party pi packages the setup uses:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/<you>/my-pi-setup/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/isthatyousaf/my-pi-setup/main/install.sh | sh
 # or from a clone:
 ./install.sh
 ```
@@ -18,9 +18,9 @@ piece afterwards with `pi update --all`, `pi config`, and `pi remove`.
 To install only this package's own extensions/skills/prompts, without the third-party set:
 
 ```bash
-pi install git:github.com/<you>/my-pi-setup
+pi install git:github.com/isthatyousaf/my-pi-setup
 # or try it once without installing:
-pi -e git:github.com/<you>/my-pi-setup
+pi -e git:github.com/isthatyousaf/my-pi-setup
 ```
 
 ## What's inside

@@ -6,13 +6,13 @@
 # `pi remove`, and `pi config` work on them separately.
 #
 # Usage:  ./install.sh          (from a clone)
-#         curl -fsSL https://raw.githubusercontent.com/<you>/my-pi-setup/main/install.sh | sh
+#         curl -fsSL https://raw.githubusercontent.com/isthatyousaf/my-pi-setup/main/install.sh | sh
 
 set -eu
 
-# EDIT ME after pushing: git link of this repo. Leave empty to install
-# from the local checkout instead (only works when run from a clone).
-SETUP_REPO="git:github.com/<you>/my-pi-setup"
+# Git link of this repo. Leave empty to install from the local checkout
+# instead (only works when run from a clone).
+SETUP_REPO="git:github.com/isthatyousaf/my-pi-setup"
 
 if ! command -v pi >/dev/null 2>&1; then
   echo "error: pi is not installed. See https://github.com/earendil-works/pi" >&2
@@ -25,16 +25,13 @@ install() {
 }
 
 # --- this setup (extensions / skills / prompts) ---
-case "$SETUP_REPO" in
-  *"<you>"*|"")
-    # Placeholder not filled in yet: install from the local checkout.
-    dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-    install "$dir"
-    ;;
-  *)
-    install "$SETUP_REPO"
-    ;;
-esac
+if [ -n "$SETUP_REPO" ]; then
+  install "$SETUP_REPO"
+else
+  # No repo link configured: install from the local checkout.
+  dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+  install "$dir"
+fi
 
 # --- third-party packages (npm) ---
 install "npm:@codexstar/pi-listen"
