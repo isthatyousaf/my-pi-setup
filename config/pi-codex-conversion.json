@@ -13,7 +13,8 @@
     "applyPatchOnly": false,
     "viewImageOnly": false,
     "webRunOnly": false,
-    "imageGenerationOnly": false
+    "imageGenerationOnly": false,
+    "customRustBinariesDir": ""
   },
   "ui": {
     "statusLine": true,
@@ -23,17 +24,43 @@
     "backgroundShellToggleShortcut": "alt+w",
     "backgroundShellPrevShortcut": "alt+q",
     "backgroundShellNextShortcut": "alt+e",
-    "backgroundShellCloseShortcut": "alt+r"
+    "backgroundShellCloseShortcut": "alt+r",
+    "codeModeDetails": false
   },
   "compaction": {
-    "responsesCompaction": false
+    "responsesCompaction": true,
+    "v2UserMessageRetention": 64
   },
   "openai": {
-    "fast": false,
+    "fast": true,
     "verbosity": "low",
     "forceCachedWebSockets": true,
     "webSearchModel": "gpt-5.4-mini",
-    "compactionModel": "gpt-5.5",
-    "compactionReasoning": "current"
+    "compactionModel": "gpt-5.4-mini",
+    "compactionReasoning": "current",
+    "cacheDiagnostics": "off",
+    "harnessIdentifierHeader": false,
+    "proxyResponsesLite": false
+  },
+  "voiceFeaturesOnly": false,
+  "prompt": {
+    "heavySystemPromptOverwrite": false
+  },
+  "voice": {
+    "v3Voice": "cove",
+    "autoResumeRealtime": false,
+    "audioSetupCompleted": true,
+    "delegationAcknowledgements": true,
+    "forwardReasoningSummaries": true,
+    "dictationShortcut": "ctrl+alt+d",
+    "realtimeShortcut": "ctrl+alt+space",
+    "muteShortcut": "ctrl+alt+m",
+    "serverShortcut": "ctrl+alt+g",
+    "dictationShortcutMode": "push",
+    "contextReasoning": "high"
+  },
+  "executionMode": "code",
+  "notebook": {
+    "maxHeapMiB": 4096
   }
 }

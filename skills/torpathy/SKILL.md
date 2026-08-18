@@ -1,6 +1,6 @@
 ---
 name: torpathy
-description: Strategic decision framework for broad programming and systems questions where the user is unsure how something should be done, is weighing valid approaches, wants to know where a fix belongs, asks who is closer to truth, asks whether something should be solved with process/prompts/guidance or with interfaces/invariants/runtime architecture, or explicitly says `torpathy`. Use this skill proactively for backend, infra, frontend, APIs, databases, deployments, debugging strategy, agent workflows, and architecture tradeoffs when the user wants strong direction rather than a neutral menu. Do not use it for ordinary implementation where the right next step is already obvious.
+description: Strategic decision framework for programming and systems questions where the user is unsure how something should be done, is weighing valid approaches, wants to know where a fix belongs, asks which side of a tradeoff dominates, wants the trade-offs of an approach or implementation spelled out, is brainstorming options and wants each one's costs named, asks whether something should be solved with process/prompts/guidance or with interfaces/invariants/runtime architecture, or explicitly says `torpathy`. Use proactively when the user wants strong direction rather than a neutral menu. Do not use for ordinary implementation where the right next step is already obvious.
 ---
 
 This skill has two jobs at once:
@@ -26,6 +26,8 @@ Use two lenses at once:
 
 - **Karpathy lens**: behavior follows incentives, defaults, examples, context, feedback loops, operator experience, and protocol pressure. Ask what the system, model, service, or humans are being rewarded or nudged to do.
 - **Torvalds lens**: bad states should be impossible, explicit, or tightly contained. Ask what API, invariant, contract, schema, state machine, ownership boundary, or lifecycle rule should prevent the failure.
+
+For non-LLM systems, the Karpathy lens maps to: operator habits, deployment defaults, configuration drift, monitoring gaps, and the path of least resistance that led to the current state.
 
 For LLM and agent problems, specialize the lenses like this:
 
@@ -73,6 +75,14 @@ Use these rules quickly:
 - **Repeated operator mistake** → prefer better interface, default, or validation over more instructions
 - **Failure crosses ownership boundaries** → clarify the boundary explicitly in code, API, schema, or lifecycle
 
+## When lenses conflict
+
+When the invariant is expensive and the behavioral fix is cheap and sufficient:
+
+- If the failure is irreversible or crosses trust boundaries → Torvalds wins
+- If the failure is cheap, reversible, and the invariant adds more complexity than it removes → Karpathy wins
+- If both are roughly equal cost → default to Torvalds (hard boundary first, softer guidance as defense in depth)
+
 ## Steering constraints
 
 Quietly bias the answer toward these properties:
@@ -110,11 +120,11 @@ Explain the incentive, protocol, feedback-loop, or operator-behavior side.
 ### 3. Torvalds
 Explain the interface, invariant, lifecycle, schema, contract, or containment side.
 
-### 4. Closer to truth
-Do not fake balance if one side is more right.
+### 4. Dominant lens
+Name which lens is more right for this specific problem. Do not fake balance.
 
 ### 5. Best trade-off / what to do now
-Recommend one concrete next step.
+Recommend one concrete next step, then list the trade-offs of that recommendation: what the user gives up, what it locks in, and the case where this choice is wrong. See [Writing the trade-offs](#writing-the-trade-offs).
 
 ### 6. What to test
 Name the repros, evals, or checks that would prove the decision was correct.
@@ -124,6 +134,21 @@ Name the repros, evals, or checks that would prove the decision was correct.
 By default, explicitly name both lenses in the answer.
 
 You may omit the names only if doing so would make the answer clunky and the same reasoning can be expressed more cleanly without losing the contrast.
+
+## Writing the trade-offs
+
+A recommendation without stated costs is a sales pitch, not a decision. Name what the user gives up, the situation where this choice loses, and what gets harder to change later. The point is to let the user override the call with full information.
+
+Good trade-offs share a few traits:
+
+- They name the actual cost. "Adds a migration and a backfill" tells the user something; "introduces some complexity" does not.
+- They use active voice with a real subject. "You pay an extra read on every write" beats "an extra read is incurred."
+- They quantify when a number exists. "One extra round trip" or "doubles write latency" beats "slower."
+- They state the condition under which the recommendation is wrong, so the user can match it against their own situation. Name a threshold where it should be reconsidered when one exists ("revisit past ~10K writes/sec").
+- They name reversibility. Say whether this is a two-way door (cheap to undo) or a one-way door (expensive or permanent), since that changes how much certainty the choice demands.
+- They stay plain. Short, direct sentences a tired engineer can scan in one pass.
+
+Test each line against a skeptical senior engineer: concrete or hand-wavy? If hand-wavy, name the real cost or cut the line.
 
 ## Tone rules
 
@@ -143,6 +168,10 @@ If the skill triggered but the actual problem is simpler than it first looked:
 - keep the verdict short
 - do not force the full structure unless it helps
 
+Minimal output example:
+
+> **Verdict:** Contract problem. Add a unique constraint on (user_id, event_id). Done.
+
 ## Anti-patterns
 
 - Do not turn every coding question into philosophy.
@@ -160,8 +189,10 @@ If the skill triggered but the actual problem is simpler than it first looked:
 
 **Torvalds:** The system still permits the bad state. If duplicate work is unacceptable, make it impossible with idempotency keys, a tighter contract, or clearer lifecycle boundaries.
 
-**Closer to truth:** Karpathy is closer on explanation. Torvalds is closer on fix location.
+**Dominant lens:** Torvalds dominates on fix location. Karpathy explains why it happened but doesn't prevent recurrence.
 
 **Recommendation:** Put the invariant in the code or runtime first, then keep guidance and defaults as defense in depth.
+
+**Trade-offs:** The idempotency key needs storage and a lookup on every write, so each request costs one extra read. It also forces callers to send a stable key, which means changing the client contract. If duplicate work were cheap to undo, this would be over-engineering; it earns its keep only because the failure is expensive.
 
 **What to test:** Reproduce the failure under retries, partial failure, and a second model/operator/environment. Confirm the bad path is structurally blocked, not merely less likely.

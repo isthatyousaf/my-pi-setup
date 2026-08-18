@@ -27,25 +27,23 @@ pi -e git:github.com/isthatyousaf/my-pi-setup
 
 **Extensions** (`extensions/`)
 
-- `full-context-bar.ts` — full-width context-usage bar widget for pi-fancy-footer
+- `comet-codex-bridge.ts` — widget + `/comet-codex-set` command that edits allowlisted pi-codex-conversion settings
+- `openai-pro-reasoning.ts` — `/pro-reasoning` and `/flex-tier` toggles for the direct OpenAI API-key provider
 - `pi-tps.ts` — average output tokens/second footer widget
-- `recap.ts` — "where were we" one-liner pinned above the editor after idle time
 - `working-indicator.ts` — morphing braille orb + shimmering verb working indicator
 
-`full-context-bar` and `pi-tps` render through [pi-fancy-footer](https://www.npmjs.com/package/pi-fancy-footer), which `install.sh` installs for you.
+**Third-party packages** (installed by `install.sh`) — pi-auto-trees, pi-codex-conversion, plannotator, pi-autoresearch, pi-linear, pi-ralph-loop, pi-better-skills, pi-pretty-codeblocks, pi-subagents, pi-claude-auth
 
-**Third-party packages** (installed by `install.sh`) — pi-listen, pi-auto-trees, pi-codex-conversion, pi-fancy-footer, pi-ralph-loop, pi-better-skills, pi-langfuse, pi-grok-build, visual-explainer, pi-pretty-codeblocks, pi-subagents, pi-claude-auth
+**Skills** (`skills/`) — code-review, codebase-design, diagnosing-bugs, domain-modeling, exa, firecrawl, grill-with-docs, grilling, handoff, implement, improve-codebase-architecture, msw, prototype, research, tdd, teach, tinyfish, to-spec, to-tickets, torpathy, wait-what, wayfinder, writing-for-agents
 
-**Skills** (`skills/`) — api-design-principles, codebase-design, diagnosing-bugs, domain-modeling, frontend-design, grill-with-docs, handoff, improve, improve-codebase-architecture, resolving-merge-conflicts, solana-dev, tdd, teach, thermo-nuclear reviews, to-prd, torpathy, writing-great-skills, writing-shape
+**Prompt templates** (`prompts/`) — `ar.md`, `ast.md`, `bro.md`, `recheck.md`
 
-**Prompt templates** (`prompts/`) — `ar.md`, `es.md`
-
-**Subagent definitions** (`agents/`) — reviewer, scout, second-opinion, worker. `install.sh` copies these to `~/.pi/agent/agents/` (never overwriting existing files) so they work with [pi-subagents](https://github.com/edxeth/pi-subagents). They reference specific models (e.g. `openai-codex/gpt-5.6-sol`, `anthropic/claude-opus-4-8`); you need your own auth for those providers, or edit the `model:` lines.
+**Subagent definitions** (`agents/`) — reviewer, scout, second-opinion, general-purpose (worker), researcher, research-worker, review-axis. `install.sh` copies these to `~/.pi/agent/agents/` (never overwriting existing files) so they work with [pi-subagents](https://github.com/edxeth/pi-subagents). They reference specific models (e.g. `openai-codex/gpt-5.6-sol`, `anthropic/claude-opus-4-8`); you need your own auth for those providers, or edit the `model:` lines.
 
 **System prompt addendum** (`APPEND_SYSTEM.md`) — behavior rules appended to pi's system prompt. `install.sh` copies it to `~/.pi/agent/APPEND_SYSTEM.md` only if you don't already have one.
 
-**Extension config** (`config/`) — fancy-footer layout and codex-conversion settings. Copied to `~/.pi/agent/` only for files you don't already have.
+**Extension config** (`config/`) — codex-conversion settings. Copied to `~/.pi/agent/` only for files you don't already have.
 
 ## Not included
 
-Settings (`settings.json`), model/provider config, MCP servers, and auth credentials are not part of this package or the installer.
+Settings (`settings.json`), model/provider config, MCP servers, and auth credentials (including Linear API keys for pi-linear) are not part of this package or the installer.

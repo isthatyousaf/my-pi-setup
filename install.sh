@@ -34,17 +34,15 @@ else
 fi
 
 # --- third-party packages (npm) ---
-install "npm:@codexstar/pi-listen"
 install "npm:@howaboua/pi-auto-trees"
 install "npm:@howaboua/pi-codex-conversion"
-install "npm:pi-fancy-footer"
+install "npm:@plannotator/pi-extension"
+install "npm:pi-autoresearch"
+install "npm:@alasano/pi-linear"
 
 # --- third-party packages (git) ---
 install "git:github.com/edxeth/pi-ralph-loop"
 install "git:github.com/edxeth/pi-better-skills"
-install "git:github.com/edxeth/pi-langfuse"
-install "git:github.com/IgorWarzocha/pi-grok-build"
-install "git:github.com/nicobailon/visual-explainer"
 install "git:github.com/vvv850/pi-pretty-codeblocks"
 install "git:github.com/edxeth/pi-subagents"
 install "git:github.com/edxeth/pi-claude-auth"
@@ -86,7 +84,7 @@ if [ -n "$root" ]; then
     echo "==> installed APPEND_SYSTEM.md"
   fi
 
-  # Extension config files (footer layout, codex tweaks). Never overwritten.
+  # Extension config files (codex-conversion settings). Never overwritten.
   for f in "$root"/config/*.json; do
     [ -e "$f" ] || continue
     base=$(basename "$f")
