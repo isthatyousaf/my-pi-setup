@@ -27,8 +27,6 @@ pi -e git:github.com/isthatyousaf/my-pi-setup
 
 **Extensions** (`extensions/`)
 
-- `comet-codex-bridge.ts` — widget + `/comet-codex-set` command that edits allowlisted pi-codex-conversion settings
-- `openai-pro-reasoning.ts` — `/pro-reasoning` and `/flex-tier` toggles for the direct OpenAI API-key provider
 - `pi-tps.ts` — average output tokens/second footer widget
 - `working-indicator.ts` — morphing braille orb + shimmering verb working indicator
 
